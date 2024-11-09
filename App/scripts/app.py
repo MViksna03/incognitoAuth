@@ -20,9 +20,6 @@ cursor.execute("""
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
 
-# Store users in a dictionary as an example (replace with database in production)
-users = {}
-
 @app.route('/')
 def index():
     if 'username' in session:
@@ -32,7 +29,7 @@ def index():
 @app.route('/home')
 def home():
     if 'username' in session:
-        return render_template('welcome.html', username=session['username'])
+        return render_template('home.html', username=session['username'])
     return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET', 'POST'])
