@@ -54,9 +54,12 @@ def register():
         if is_eid_registered(eid):
             message = "Account with this eID is already registered!"
             return render_template('register.html', message=message)
-        register_user(eid, username, password)
-        session['username'] = username
-        return redirect(url_for('home'))
+        try:
+            register_user(eid, username, password)
+            session['username'] = username
+            return redirect(url_for('home'))
+        except Exception as e:
+            message = "Username already taken!"
     return render_template('register.html', message=message)
 
 """
