@@ -3,3 +3,5 @@
 *.db
 
 /Test/
+
+/App/scripts/__pycache__

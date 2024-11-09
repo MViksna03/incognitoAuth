@@ -19,5 +19,12 @@
             <button type="submit">Login</button>
         </form>
     </div>
+    <!-- JavaScript to assign the message to a variable -->
+    <script>
+        {% if message %}
+        var message = "{{ message }}";
+        alert(message);  // Display message in an alert box
+        {% endif %}
+    </script>
 </body>
 </html>
