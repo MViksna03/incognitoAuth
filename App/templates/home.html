@@ -7,10 +7,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h2>Welcome, {{ username }}!</h2>
-        <p>some random text</p>
-        <a href="/logout">Logout</a>
+    <div class="login-container">
+        <h2 class="login-header">Welcome, {{ username }}!</h2>
+        <p class="login-subtitle">You have successfully logged in.</p>
+        
+        <button type="button" class="login-button" disabled>Continue (not implemented)</button>
+        
+        <a href="/logout" class="login-button" style="display: inline-block; text-align: center; margin-top: 1rem; background-color: #4b5563;">
+            Logout
+        </a>
     </div>
 </body>
 </html>
