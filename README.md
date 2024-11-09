@@ -1,2 +1,2 @@
-# Junction-24-Jugla-404
-Junction 2024 - team "Jugla 404"
+# incognitoAuth
+Our authentification solution would provide polis.sitram.fi with end-to-end anonymous proof of user being a real person.
