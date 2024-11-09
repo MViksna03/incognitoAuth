@@ -18,18 +18,24 @@
     <div class="login-subtitle">Use your credentials to access the portal</div>
     
     <!-- Sign In Form -->
-    <form action="/index" method="get">
-      <input type="text" placeholder="Username" class="login-input" required>
-      <input type="password" placeholder="Password" class="login-input" required>
+    <form action="/" method="POST">
+      <input type="text" name="username" placeholder="Username" class="login-input" required>
+      <input type="password" name="password" placeholder="Password" class="login-input" required>
       <button type="submit" class="login-button">Sign In</button>
     </form>
 
     <!-- Sign Up Button (using an anchor tag to navigate to register.html) -->
-    <a href="register.html">
+    <a href="/register">
       <button type="button" class="incognito-button">Sign up</button>
     </a>
 
     <div class="footer-text">© 2024 Junction.</div>
   </div>
+  <script>
+    {% if message %}
+    var message = "{{ message }}";
+    alert(message);  // Display message in an alert box
+    {% endif %}
+</script>
 </body>
 </html>

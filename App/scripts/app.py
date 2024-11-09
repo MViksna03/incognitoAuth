@@ -23,11 +23,20 @@ cursor.execute("""
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
 app.secret_key = os.getenv('SECRET_KEY')
 
-@app.route('/')
-def index():    
+@app.route('/', methods=['GET', 'POST'])
+def index(): 
     if 'username' in session:
         return redirect(url_for('home'))
-    return render_template('index.html')
+    message = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # Authenticate user
+        if login_user(username, password):
+            session['username'] = username
+            return redirect(url_for('home'))
+        message = "Wrong password or username!"
+    return render_template('index.html', message=message)   
 
 @app.route('/home')
 def home():
@@ -50,6 +59,7 @@ def register():
         return redirect(url_for('home'))
     return render_template('register.html', message=message)
 
+"""
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     message = None
@@ -62,7 +72,8 @@ def login():
             return redirect(url_for('home'))
         message = "Wrong password or username!"
     return render_template('login.html', message=message)
-
+"""
+    
 @app.route('/logout')
 def logout():
     session.pop('username', None)
