@@ -4,7 +4,7 @@ import sqlite3  # Database for storing user info
 import os
 
 load_dotenv()
-
+#test
 # Database setup (replace with a more robust system in production)
 conn = sqlite3.connect("users.db")
 cursor = conn.cursor()
@@ -21,7 +21,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
 
 @app.route('/')
-def index():
+def index():    
     if 'username' in session:
         return redirect(url_for('home'))
     return render_template('index.html')
