@@ -1,12 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from dotenv import load_dotenv
+from register_user import register_user
+from is_eid_registered import is_eid_registered
+from login_user import login_user
 import sqlite3  # Database for storing user info
 import os
 
 load_dotenv()
-#test
+
 # Database setup (replace with a more robust system in production)
-conn = sqlite3.connect("users.db")
+conn = sqlite3.connect("users.db", check_same_thread=False)
 cursor = conn.cursor()
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS users (
@@ -30,29 +33,35 @@ def index():
 def home():
     if 'username' in session:
         return render_template('home.html', username=session['username'])
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    message = None
     if request.method == 'POST':
-        email = request.form['email']
+        eid = request.form['eID']
         username = request.form['username']
         password = request.form['password']
-        # Save user info (simple example)
-        users[username] = {'email': email, 'password': password}
-        return redirect(url_for('login'))
-    return render_template('register.html')
+        if is_eid_registered(eid):
+            message = "Account with this eID is already registered!"
+            return render_template('register.html', message=message)
+        register_user(eid, username, password)
+        session['username'] = username
+        return redirect(url_for('home'))
+    return render_template('register.html', message=message)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    message = None
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         # Authenticate user
-        if username in users and users[username]['password'] == password:
+        if login_user(username, password):
             session['username'] = username
             return redirect(url_for('home'))
-    return render_template('login.html')
+        message = "Wrong password or username!"
+    return render_template('login.html', message=message)
 
 @app.route('/logout')
 def logout():
