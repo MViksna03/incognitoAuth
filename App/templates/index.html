@@ -16,12 +16,19 @@
   <div class="login-container">
     <div class="login-header">Incognito Authenticator</div>
     <div class="login-subtitle">Use your credentials to access the portal</div>
-    <form action="#">
+    
+    <!-- Sign In Form -->
+    <form action="/index" method="get">
       <input type="text" placeholder="Username" class="login-input" required>
       <input type="password" placeholder="Password" class="login-input" required>
       <button type="submit" class="login-button">Sign In</button>
-      <button type="button" class="incognito-button">Sign up</button>
     </form>
+
+    <!-- Sign Up Button (using an anchor tag to navigate to register.html) -->
+    <a href="register.html">
+      <button type="button" class="incognito-button">Sign up</button>
+    </a>
+
     <div class="footer-text">© 2024 Junction.</div>
   </div>
 </body>
