@@ -8,10 +8,9 @@
 </head>
 <body>
     <div class="container">
-        <h2>Welcome!</h2>
-        <p>Please choose an option:</p>
-        <a href="{{ url_for('register') }}" class="button">Sign Up</a>
-        <a href="{{ url_for('login') }}" class="button">Login</a>
+        <h2>Welcome, {{ username }}!</h2>
+        <p>some random text</p>
+        <a href="/logout">Logout</a>
     </div>
 </body>
 </html>
